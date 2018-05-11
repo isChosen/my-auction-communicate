@@ -1,20 +1,20 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
 
+<div class="parent">
+    <h4>app 共同父组件</h4>
+    <hr>
+    <p>报价组件</p>
+    <app-price-quote (buy)="buyHandler($event)"></app-price-quote>
+
+    <hr>
+    <p>订单组件</p>
+    <app-order [priceQuote] = "priceQuote"></app-order>
+    <div>app 组件: 股票代码是: {{priceQuote.stockCode}}, 价格是: {{priceQuote.latePrice | number: '2.2-2'}}</div>
+</div>
+<!--
+组件的通讯分两种 
+    输入属性: 父组件向子组件传递数据 [childField]="parentField", childField 需要用 @Input() 修饰;
+    输出属性: childField 需要用 @Output 修饰, 而且需要一个 EventEmitter<any> (import { EventEmitter } from '@angular/core') 事件发射器发射数据:
+        1. 父子组件关系传递;
+        2. 有共同父组件的多子组件关系传递 [中间人: parentComponent];
+        3. 无共同父组件的多子组件关系传递 [中间人: service].
+    -->
